@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fistbump/screens/calendar_page.dart';
 import 'package:fistbump/screens/home_page.dart';
 import 'package:flutter/material.dart';
@@ -27,21 +29,24 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.black,
-          title: const Text(
-            'Home',
-            style: TextStyle(color: Colors.white),
+        backgroundColor: Colors.black,
+        title: const Text(
+          'Home',
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        actions: [
+          IconButton(onPressed: () => {}, icon: Icon(Icons.map_outlined))
+        ],
+        leading: IconButton(
+          icon: Icon(
+            Icons.logout,
           ),
-          centerTitle: true,
-          actions: [
-            IconButton(onPressed: () => {}, icon: Icon(Icons.map_outlined))
-          ],
-          leading: IconButton(
-            icon: Icon(
-              Icons.menu,
-            ),
-            onPressed: () => {},
-          )),
+          onPressed: () => {
+            FirebaseAuth.instance.signOut()
+          },
+        )
+      ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
